@@ -12,10 +12,10 @@ def get_model():
     vgg = tf.keras.applications.vgg19.VGG19(include_top=False, weights='imagenet')
     vgg.trainable = False
     vgg=replace_max_by_average_pooling(vgg)
-    style_outputs = [vgg.get_layer(name).get_output_at(0) for name in style_layers]
-    content_outputs = [vgg.get_layer(name).get_output_at(0) for name in content_layers]
+    style_outputs = [vgg.get_layer(name).get_output_at(1) for name in style_layers]
+    content_outputs = [vgg.get_layer(name).get_output_at(1) for name in content_layers]
     model_outputs = style_outputs + content_outputs
-    return Model(vgg.layers[0].input, model_outputs)
+    return Model(vgg.layers[1].input, model_outputs)
 
 def replace_max_by_average_pooling(model):
     input_layer, *other_layers = model.layers
