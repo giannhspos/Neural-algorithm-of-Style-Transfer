@@ -2,6 +2,7 @@ import IPython.display
 import cv2
 import tensorflow as tf
 import numpy as np
+from PIL import Image
 
 from read_images import load_and_process_img, deprocess_img, content_layers, style_layers, num_content_layers, \
     num_style_layers
